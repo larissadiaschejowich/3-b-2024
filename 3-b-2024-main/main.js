@@ -14,17 +14,22 @@ for (let i=0; i < botoes.length; i++) {
     console.log(i);
 }
 const contadores = document.querySelectorAll(".contador");
-const tempoObjetivo1 = new Date("2023-10-05T00:00:00");
+const tempoObjetivo1 = new Date("2020-10-05T00:00:00");
 const tempoObjetivo2 = new Date("2023-12-05T00:00:00");
 const tempoObjetivo3 = new Date("2023-12-30T00:00:00");
 const tempoObjetivo4 = new Date("2024-02-01T00:00:00");
 
 const tempos = [tempoObjetivo1,tempoObjetivo2,tempoObjetivo3,tempoObjetivo4];
-
-contadores[0].textContent = calculatempo(tempos[0]);
-contadores[1].textContent = calculaTempo(tempos[1]);
-contadores[2].textContent = calculaTempo(tempos[2]);
-contadores[3].textContent = calculaTempo(tempos[3]);
+function atualizarCronomentro(){
+for (let i = 0; i <contadores.length; i++){
+    contadores[i].textContent= calculartempo(tempos[0]);
+}
+}
+function comecarCronometro(){
+atualizarCronomentro()
+setInterval(atualizarCronomentro(), 1000);
+}
+comecarCronometro();
 let tempoAtual = new Date();
  contadores[0].textContent = tempoObjetivo1 - tempoAtual;
  contadores[1].textContent = tempoObjetivo2 - tempoAtual;
@@ -42,6 +47,9 @@ function calculatempo(tempoObjetivo) {
     segundos %= 60;
     minutos %= 60;
     horas %=24;
-
+if (tempoFinal > 0){
     return dias + "dias" + hora + "horas" + minutos + "minutos" + segundos + "segundos";
+} else {
+    return"prazo finalizado";
 }
+
